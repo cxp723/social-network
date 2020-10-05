@@ -1,0 +1,26 @@
+.userLogo {
+    margin: 0 auto;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 0 5px black;
+    background-image: url("./../../../images/user-logo.png");
+    background-size: 85%;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: 5px;
+}
+.friendsList {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    align-items: center;
+}
+.friend {
+    margin-bottom: 10px;
+    text-align: center;
+}
+h1 {
+    font-weight: normal;
+    text-align: center;
+}

@@ -1,0 +1,36 @@
+.header {
+    padding-right: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    grid-area: h;
+    background-color: lightblue;
+  }
+  .logo {
+    width: 60px;
+    height: 60px;
+    margin-left: 10px;
+    background-image: url("./../../images/logo.png");
+    background-size: 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+  .userInfo {
+    height: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+  .user {
+    margin: 5px 0;
+  }
+  .login {
+    font-size: 1.2em;
+    text-decoration: none;
+    color: white;
+  }
+  .logOut {
+    cursor: pointer;
+    outline: none;
+    border-radius: 10px;
+  }

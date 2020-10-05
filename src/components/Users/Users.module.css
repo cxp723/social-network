@@ -1,0 +1,86 @@
+.user {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    margin: 15px auto;
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 10px;
+    width: 80%;
+}
+.photo {
+    width: 100px;
+    height: 100px;
+}
+.preview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.country::after {
+    content: ',';
+}
+.name {
+    font-size: 1.3em;
+    margin-bottom: 100px;
+}
+.location {
+    font-size: .8em;
+}
+.location p {
+    margin: 0;
+}
+.followButton {
+    cursor: pointer;
+    outline: none;
+    display: block;
+    background-color: lightblue;
+    margin-top: 10px;
+    border-radius: 10px;
+    padding: 5px;
+    width: 80px;
+    color: white;
+    box-shadow: 3px 3px 6px grey;
+}
+.followButton:active {
+    box-shadow: -1px -1px 3px grey;
+}
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.selectedPage, .pageNumber {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 15px 3px;
+    height: 17px;
+    width: 17px;
+    border: 1px solid cornflowerblue;
+    border-radius: 50%;
+}
+.selectedPage {
+    border: 2px solid cornflowerblue; 
+    box-shadow: 2px 2px 5px cornflowerblue;
+    height: 19px;
+    width: 19px;
+}
+.showMoreButton {
+    cursor: pointer;
+    outline: none;
+    display: block;
+    width: 120px;
+    background-color: lightblue;
+    font-size: 1.1em;
+    margin: 10px auto 30px;
+    border-radius: 10px;
+    padding: 5px 10px;
+    color: white;
+    box-shadow: 3px 3px 6px grey;
+}

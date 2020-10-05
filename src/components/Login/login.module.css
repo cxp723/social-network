@@ -1,0 +1,27 @@
+.loginPage {
+    display: flex;
+    height: 100%;
+}
+.loginForm {
+    position: relative;
+    background-color: lightblue;
+    border: 1px solid grey;
+    border-radius: 5px;
+    width: 60%;
+    text-align: center;
+    align-items: center;
+    display: block;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    justify-content: space-between;
+}
+.formRow {
+    width: 60%;
+}
+.errorMessage {
+    position: absolute;
+    top: 45px;
+    color: red;
+}

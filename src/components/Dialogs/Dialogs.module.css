@@ -1,0 +1,83 @@
+.dialogs {
+    display: grid;
+    grid-template-columns: 2fr 8fr;
+}
+.buddies {
+    padding: 0 10px 10px 30px;
+    border-right: solid 2px black;
+}
+.buddy a{
+    margin-top: 5px;
+    font-size: 1.2em;
+    text-decoration: none;
+    color: black;
+}
+.messages {
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    width: 62%;
+}
+.message {
+    border: 1px solid cornflowerblue;
+    border-radius: 10px;
+    padding: 5px;
+    margin: 5px;
+}
+.buddy a.active {
+    color: cornflowerblue;
+}
+.to {
+    align-self: flex-end;
+}
+.from {
+    align-self: flex-start;
+}
+.buddy {
+    display: flex;
+    padding-top: 15px;
+    align-items: center;
+}
+.dialogImage {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 50%;
+    box-shadow: 0 0 5px black;
+    background-image: url("./../../images/user-logo.png");
+    background-size: 85%;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+.newMessage {
+    margin-left: 20px;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    height: 150px;
+    justify-content: space-around;
+
+}
+.newMessageText {
+    width: 100%;
+    height: 10ch;
+    border-radius: 5px;
+}
+.newMessageText:focus {
+    outline: none;
+}
+.send:active {
+    outline: none;
+}
+.send {
+    outline: none;
+    cursor: pointer;
+    background-color: lightblue;
+    font-size: 1.3em;
+    margin-top: 10px;
+    border-radius: 20px;
+    padding: 5px 30px;
+    color: white;
+    box-shadow: 3px 3px 6px grey;
+}

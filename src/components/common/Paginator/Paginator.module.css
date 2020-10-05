@@ -1,0 +1,33 @@
+div.selectedPage {
+    background-color: lightgray;
+    box-shadow: 1px 1px 5px grey;
+}
+.paginator {
+    margin: 40px 0;
+    display: flex;
+    justify-content: center;
+    
+}
+.button {
+    background-color: #fff;
+    cursor: pointer;
+    box-shadow: 2px 2px 5px grey;
+    outline: none;
+    border: none;
+    width: 30px;
+    margin: 0 10px;
+}
+.pages {
+    display: flex;
+}
+.page {
+    margin: 0 10px  ;
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+    box-shadow: 2px 2px 5px grey;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

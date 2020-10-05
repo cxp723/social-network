@@ -1,0 +1,14 @@
+.formControl {
+    width: 100%;
+    max-height: 140px;
+}
+.hasError textarea, .hasError input {
+    border: 2px solid red;
+}
+.errorMessage {
+    color: red;
+    position: absolute;
+}
+span.errorMessage {
+    margin-left: 10px;
+}
