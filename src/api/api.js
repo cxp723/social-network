@@ -10,14 +10,23 @@ const apiInstance = axios.create ({
 
 export const profileAPI = {
     getProfile (userId) {
-        let profileInfo = apiInstance.get('profile/' + userId).then(response => response.data);
-        return profileInfo;
+        return apiInstance.get('profile/' + userId).then(response => response.data);
+    },
+    setProfile (profile) {
+        return apiInstance.put('profile', profile).then(response => response.data);
     },
     getStatus (profileId) {
         return apiInstance.get('profile/status/' + profileId).then(response => response.data);
     },
     updateStatus (status) {
         return apiInstance.put('profile/status', {status}).then(response => response.data);
+    },
+    uploadPhoto (photoFile) {
+        const formData = new FormData();
+        formData.append("image", photoFile);
+        return apiInstance.put('profile/photo', formData, {headers: {
+            'Content-Type': 'multipart/form-data'
+          }}).then(response => response.data)
     }
 }
 

@@ -12,14 +12,16 @@ const FormControl = ({meta, children}) => {
 }
 
 export const Textarea = (props) => {
-    const {input, meta, ...restProps} = props;
+    const {input, meta, innerText, ...restProps} = props;
     return (
-        <FormControl {...props}> <textarea {...input} {...restProps}/> </FormControl>
+        <FormControl {...props}> <span className={classes.innerText}>{innerText}</span>
+        <textarea className={!!innerText && classes.wideTextarea} {...input} {...restProps}/> </FormControl>
     )
 }
 export const Input = (props) => {
-    const {input, meta, ...restProps} = props;
+    const {input, meta, innerText, ...restProps} = props;
     return (
-        <FormControl {...props}> <input {...input} {...restProps}/> </FormControl>
+        <FormControl {...props}> <span className={classes.innerText}>{innerText}</span>
+        <input className={!!innerText && classes.wideInput}{...input} {...restProps}/> </FormControl>
     )
 }

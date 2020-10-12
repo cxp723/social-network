@@ -1,5 +1,5 @@
 div.selectedPage {
-    background-color: lightgray;
+    background-color: lightblue;
     box-shadow: 1px 1px 5px grey;
 }
 .paginator {
@@ -15,19 +15,15 @@ div.selectedPage {
     outline: none;
     border: none;
     width: 30px;
-    margin: 0 10px;
-}
-.pages {
-    display: flex;
-}
-.page {
-    margin: 0 10px  ;
-    width: 30px;
     height: 30px;
-    background-color: #fff;
-    box-shadow: 2px 2px 5px grey;
-    cursor: pointer;
+    margin: 0 10px;
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.button:hover {
+    background-color: lightcyan;
+}
+.pages {
+    display: flex;
 }

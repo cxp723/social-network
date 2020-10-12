@@ -19,7 +19,7 @@ const Paginator = React.memo(({itemsTotalCount, itemsOnPage, onPageSelectCallbac
     }
     let pages = [];
     for (let p = leftLimit; p <= rightLimit; p++) {
-        pages.push(<div key={p} onClick={(e) => {onPageSelectCallback(e.currentTarget.innerText)}} className={`${classes.page} ${p.toString() === page.toString() && classes.selectedPage}`}>{p}</div>);
+        pages.push(<div key={p} onClick={(e) => {onPageSelectCallback(e.currentTarget.innerText)}} className={`${classes.button} ${p.toString() === page.toString() && classes.selectedPage}`}>{p}</div>);
     }
     return (
         <div className={classes.paginator}>

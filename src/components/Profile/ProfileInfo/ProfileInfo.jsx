@@ -1,27 +1,26 @@
 import React from 'react';
+import ProfileDescription from './ProfileDescription';
 import classes from './ProfileInfo.module.css';
-import user_logo from '../../../images/person-male.png';
-import wallpaper from '../../../images/user-wallpaper.jpg';
-import ProfileStatus from './ProfileStatus/ProfileStatus-hook';
+import ProfilePhoto from './ProfilePhoto';
 
 
-const ProfileInfo = (props) => {
-    let profile = props.profile;
+
+const ProfileInfo = ({ profile, isOwner, updatingProfile, ...props }) => {
     return (
-        <div className={classes.profile}>
-            <div><img src={profile.photos.large ? profile.photos.large : wallpaper} className={classes.main_picture} alt="user wallpaper"/></div>
-            <div className={classes.info}>
-                <img className={classes.ava} src={profile.photos.small ? profile.photos.small : user_logo} alt="preview" />
-                <div className={classes.description}>
-                    <h1>{profile.fullName}</h1>
-                    <ProfileStatus status={props.status} updateStatus={props.updateStatus} />
-                    <p>Professional talents: {profile.lookingForAJobDescription}</p>
-                    <p>About me: {profile.aboutMe}</p>
-                    <p>Instagram: {profile.contacts.instagram}</p>
-                </div>
-            </div>
+        <div className={classes.info}>
+            <ProfilePhoto uploadingPhoto={props.uploadingPhoto} isOwner={isOwner} savePhoto={props.savePhoto} profile={profile} />
+            <ProfileDescription profile={profile}
+            status={props.status}
+            updateStatus={props.updateStatus}
+            isOwner={isOwner}
+            updatingProfile={updatingProfile}
+            updatingProfileInProcess={props.updatingProfileInProcess}
+            updateProfile={props.updateProfile}
+            updateFetching={props.updateFetching}/>
         </div>
+
     )
 }
+
 
 export default ProfileInfo;

@@ -1,36 +1,109 @@
-.main_picture {
-    height: 200px;
-    width: 100%;
-    object-fit: cover;
-  }
-
   .ava {
     width: 200px;
     height: 200px;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 50%;
     box-shadow: 0 0 7px black;
   }
   .info {
-    margin: 25px;
-    display: flex;
+    margin: 25px 25px 25px 80px;
+    display: flex;  
     align-items: center;
   }
   .description {
-    padding: 10px;
     margin-left: 40px;
-    max-width: 500px;
+    width: 70%;
   }
   .description p{
     overflow: hidden;
     text-overflow: ellipsis;
   }
   .description h1 {
-    margin-top: 0;
+    margin: 0;
+    display: inline-block;
     text-align: left;
   } 
+  .description > div {
+    margin: 5px;
+  }
+  .contacts {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: space-between;
+  }
+  .contact {
+    width: 45%;
+    margin: 10px 20px 0 0;
+  }
+  .formRow {
+    display: flex;
+  }
+  .shortInput {
+    width: 45%;
+  }
+  .aboutMe {
+    width: 97%;
+  }
+  .buttons {
+    text-align: center;
+  }
+  .bottomSection {
+    padding-bottom: 40px;
+    position: relative;
+  }
   .status {
+    cursor: pointer;
     height: 30px;
     display: flex;
     align-items: center;
+  }
+  .status span {
+    font-size: .9em;
+    color: gray;
+    padding-left: 15px;
+  }
+  .semiBold {
+    font-size: 1.3em;
+    white-space: nowrap;
+  }
+  .bigCheckbox {
+    width: 20px;
+    height: 20px;
+  }
+  .editIcon {
+    transition: opacity .2s;
+    width: 30px;
+    opacity: 0;
+    margin-left: 100px;
+    cursor: pointer;
+  }
+  .description:hover .editIcon {
+    opacity: 100%;
+  }
+  .invisibleInput {
+    visibility: hidden;
+    display: none;
+  }
+  .photoIcon {
+    transition: opacity .2s;
+    opacity: 0;
+    width: 30px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    cursor: pointer;
+  }
+  .photoIcon:hover, .editIcon:hover {
+    transform: scale(1.1);
+  }
+  .userPhoto {
+    align-self: flex-start;
+    position: relative;
+  }
+  .userPhoto:hover .photoIcon {
+    opacity: 100%;
+  }
+  .bluredPhoto {
+    opacity: 50%;
   }

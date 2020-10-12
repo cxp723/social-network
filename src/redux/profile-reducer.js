@@ -1,15 +1,24 @@
 import { profileAPI } from './../api/api';
+import { stopSubmit } from 'redux-form';
 
 const ADD_POST = 'ADD-POST';
 const SET_PROFILE = 'SET-PROFILE';
 const SET_STATUS = 'SET-STATUS';
 const TOGGLE_PRELOADER = 'TOGGLE-PRELOADER';
 const DELETE_POST = 'DELETE-POST';
-export const deletePost = (id) => ({type: DELETE_POST, id});
+const SAVE_PHOTO = 'SAVE_PHOTO';
+const TOGGLE_UPLOADING = 'TOGGLE_UPLOADING';
+const TOGGLE_UPDATING = 'TOGGLE_UPDATING';
+const UPDATING_PROFILE = 'UPDATING_PROFILE';
+export const deletePost = (id) => ({ type: DELETE_POST, id });
 export const addPost = (text) => ({ type: ADD_POST, text });
 export const setProfile = (profile) => ({ type: SET_PROFILE, profile });
 export const setStatus = (status) => ({ type: SET_STATUS, status });
+export const setPhoto = (photos) => ({ type: SAVE_PHOTO, photos });
 export const togglePreloader = (fetching) => { return { type: 'TOGGLE-PRELOADER', fetching } };
+export const toggleUploading = () => { return { type: 'TOGGLE_UPLOADING' } };
+const toggleUpdating = (isFetching) => { return { type: 'TOGGLE_UPDATING', isFetching } };
+export const updatingProfileInProcess = (updating) => { return { type: 'UPDATING_PROFILE', updating } };
 const initialState = {
     profile: null,
     status: '',
@@ -21,8 +30,11 @@ const initialState = {
         { message: "Lifecycle methods use a form of hooking that allows execution of code at set points during a component's lifetime.", id: 5, likesCount: 15 },
         { message: "shouldComponentUpdate allows the developer to prevent unnecessary re-rendering of a component by returning false if a render is not required.", id: 6, likesCount: 20 },
         { message: "React rules!", id: 7, likesCount: 13 },
-    ],
-    fetching: false
+        ],
+    fetching: false,
+    uploadingPhoto: false,
+    updatingProfile: false,
+    updateFetching: false
 };
 const profileReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -34,13 +46,15 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 posts: [...state.posts, newPost]
             };
-            case DELETE_POST :
-                return {...state, posts: state.posts.filter(post => post.id !== action.id)}
+        case DELETE_POST:
+            return { ...state, posts: state.posts.filter(post => post.id !== action.id) }
         case SET_PROFILE:
             return {
                 ...state,
                 profile: action.profile
             };
+        case SAVE_PHOTO:
+            return { ...state, profile: { ...state.profile, photos: action.photos } }
         case SET_STATUS:
             return {
                 ...state,
@@ -51,6 +65,21 @@ const profileReducer = (state = initialState, action) => {
                 ...state,
                 fetching: action.fetching
             };
+        case TOGGLE_UPLOADING:
+            return {
+                ...state,
+                uploadingPhoto: !state.uploadingPhoto
+            };
+        case TOGGLE_UPDATING:
+            return {
+                ...state,
+                updateFetching: action.isFetching
+            };
+        case UPDATING_PROFILE:
+            return {
+                ...state,
+                updatingProfile: action.updating
+            };
         default: return state;
     }
 }
@@ -58,8 +87,8 @@ const profileReducer = (state = initialState, action) => {
 export const getProfileWithStatus = (profileId) => {
     return async (dispatch) => {
         dispatch(togglePreloader(true));
-        await dispatch (getProfile(profileId));
-        await dispatch (getStatus(profileId));
+        await dispatch(getProfile(profileId));
+        await dispatch(getStatus(profileId));
         dispatch(togglePreloader(false));
     }
 }
@@ -78,9 +107,52 @@ export const getStatus = (profileId) => {
 export const updateStatus = (status) => {
     return async (dispatch) => {
         let data = await profileAPI.updateStatus(status)
-            if (data.resultCode === 0) {
-                dispatch(setStatus(status));
+        if (data.resultCode === 0) {
+            dispatch(setStatus(status));
+        }
+    }
+}
+export const savePhoto = (photoFile) => {
+    return async (dispatch) => {
+        dispatch(toggleUploading());
+        let response = await profileAPI.uploadPhoto(photoFile);
+        if (response.resultCode === 0) dispatch(setPhoto(response.data.photos));
+        dispatch(toggleUploading());
+    }
+}
+export const updateProfile = (data, me) => {
+    
+    const parseErrorObject = (errors) => {
+        let errorsObject = {};
+        errors.forEach((error) => {
+            let element = '';
+            let message = '';
+            let errorInArray = error.split(' ');
+            let lastElement = errorInArray[errorInArray.length - 1];
+            if (lastElement.search(/->/) > 0) {
+                element = lastElement.slice(lastElement.search(/->/) + 2, -1)
+                element = 'contacts.' + element[0].toLowerCase() + element.substring(1);
+            } else {
+                element = lastElement.slice(1, -1);
+                element = element[0].toLowerCase() + element.substring(1);
             }
+            message = error.split('(')[0];
+
+            errorsObject[element] = message;
+            console.log(errorsObject);
+        })
+        return errorsObject;
+    }
+    return async (dispatch) => {
+        dispatch(toggleUpdating(true));
+        let response = await profileAPI.setProfile(data);
+        if (response.resultCode === 0) {
+            dispatch(getProfile(me));
+            dispatch(updatingProfileInProcess(false))
+        } else {
+            dispatch(stopSubmit('edit-profile', parseErrorObject(response.messages)))
+        }
+        dispatch(toggleUpdating(false));
     }
 }
 export default profileReducer;
