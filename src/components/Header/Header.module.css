@@ -1,10 +1,15 @@
-.header {
+.horizontalBar {
     padding-right: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    grid-area: h;
     background-color: lightblue;
+  }
+  .header {
+    grid-area: h;
+  }
+  .footer {
+    grid-area: f;
   }
   .logo {
     width: 60px;

@@ -52,10 +52,13 @@ export const authAPI = {
     auth () {
         return apiInstance.get('auth/me').then(response => response.data)
     },
-    login (email, password, rememberMe) {
-        return apiInstance.post('auth/login', {email, password, rememberMe}).then(response => response.data)
+    login (email, password, rememberMe, captcha) {
+        return apiInstance.post('auth/login', {email, password, rememberMe, captcha}).then(response => response.data)
     },
     logout () {
         return apiInstance.delete('auth/login').then(response => response.data)
+    },
+    getCaptcha () {
+        return apiInstance.get('security/get-captcha-url').then(response => response.data);
     }
 }

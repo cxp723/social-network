@@ -1,28 +1,31 @@
 import { authAPI } from "../api/api";
-import { stopSubmit } from "redux-form";
+import { resetSection, stopSubmit } from "redux-form";
 
 let initialState = {
     id: null,
     email: null,
     login: null,
-    isAuth: false
+    isAuth: false,
+    captcha: null, 
+    isFetching: false
 }
 
-export const setUserData = (id, email, login, isAuth) => ({ type: 'SET-USER-DATA', id, email, login, isAuth });
+export const setUserData = (id, email, login, isAuth) => ({ type: 'SET-USER-DATA', payload: {id, email, login, isAuth} });
 const SET_USER_DATA = 'SET-USER-DATA';
+const setCaptchaPicture = (captcha) => ({type: 'SET_CAPTCHA_PICTURE', payload: {captcha}});
+const SET_CAPTCHA_PICTURE = 'SET_CAPTCHA_PICTURE';
+const toggleIsFetching = (isFetching) => ({type: 'TOGGLE_IS_FETCHING', payload: {isFetching}});
+const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 
-let authReducer = (state = initialState, { type, id, email, login, isAuth }) => {
-    let newState = { ...state };
-    switch (type) {
+let authReducer = (state = initialState, action) => {
+    switch (action.type) {
 
-        case SET_USER_DATA:
-            newState.id = id;
-            newState.email = email;
-            newState.login = login;
-            newState.isAuth = isAuth;
-            return newState;
+        case SET_USER_DATA: 
+        case SET_CAPTCHA_PICTURE:
+        case TOGGLE_IS_FETCHING:
+            return {...state, ...action.payload}
 
-        default: return newState;
+        default: return state;
     }
 }
 
@@ -31,19 +34,32 @@ export const auth = () => {
         return authAPI.auth().then((data) => {
             if (data.resultCode === 0) {
                 dispatch(setUserData(data.data.id, data.data.email, data.data.login, true));
+                dispatch(setCaptchaPicture(null));
             }
+            dispatch(toggleIsFetching(false));
         })
     }
 }
-export const login = (email, password, rememberMe) => {
+export const login = (email, password, rememberMe, captcha) => {
     return async (dispatch) => {
-        let response = await authAPI.login(email, password, rememberMe)
-        response.resultCode === 0
-            ? dispatch(auth())
-            : dispatch(stopSubmit("loginForm", { _error: response.messages[0] }));
+        dispatch(toggleIsFetching(true));
+        let response = await authAPI.login(email, password, rememberMe, captcha);
+        dispatch(resetSection('loginForm', ['captcha']))
+        if (response.resultCode === 0) {
+            dispatch(auth());
+        } else {
+            dispatch(stopSubmit("loginForm", { _error: response.messages[0] }));
+            response.resultCode === 10 && dispatch(getCaptcha());
+            dispatch(toggleIsFetching(false));
+        }
     }
 }
-
+const getCaptcha = () => {
+    return async (dispatch) => {
+        let response = await authAPI.getCaptcha();
+        dispatch(setCaptchaPicture(response.url));
+    }
+}
 export const logout = () => {
     return async (dispatch) => {
         let response = await authAPI.logout()

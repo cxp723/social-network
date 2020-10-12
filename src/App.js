@@ -13,7 +13,10 @@ import { initializing } from './redux/app-reducer';
 import Preloader from './components/common/Preloader/Preloader';
 import { connect } from 'react-redux';
 import {withSuspense} from './hoc/withSuspense';
+import Footer from './components/Footer/Footer';
+
 const UsersContainer = React.lazy(() => import('./components/Users/Users-container'));
+
 
 class App extends React.Component {
   componentDidMount () {
@@ -35,6 +38,7 @@ class App extends React.Component {
           <Route path='/users' render={withSuspense(UsersContainer)} />
           <Route path='/login' render={() => <Login />} />
         </div>
+        <Footer />
       </div>
     );
   }
