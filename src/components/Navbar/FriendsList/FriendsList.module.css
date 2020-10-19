@@ -4,20 +4,17 @@
     height: 40px;
     border-radius: 50%;
     box-shadow: 0 0 5px black;
-    background-image: url("./../../../images/user-logo.png");
     background-size: 85%;
     background-repeat: no-repeat;
     background-position: center;
     margin-bottom: 5px;
 }
 .friendsList {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
 }
 .friend {
-    margin-bottom: 10px;
+    padding: 10px 0;
     text-align: center;
 }
 h1 {

@@ -6,7 +6,7 @@ import classes from './../Dialogs.module.css';
 const Messages = ({ messages }) => {
     let endOfMessages = useRef(null);
     const scrollToBottom = () => {
-        endOfMessages.current.scrollIntoView();
+        endOfMessages.current.scrollIntoView(false);
     }
     useEffect(() => {scrollToBottom()}, [messages, endOfMessages]);
     return (

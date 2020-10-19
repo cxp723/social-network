@@ -13,8 +13,9 @@
     color: black;
 }
 .messagesContainer {
+    margin-top: 20px;
     overflow-y: auto;
-    height: 360px;
+    height: 325px;
     width: 65%;
 }
 .messages {

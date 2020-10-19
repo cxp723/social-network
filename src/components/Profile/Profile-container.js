@@ -5,14 +5,21 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Preloader from './../common/Preloader/Preloader';
 import { compose } from 'redux';
+import { reset } from 'redux-form';
 
 
-class ProfileAPIContainer extends React.Component {
-    isOwner = false
+class ProfileContainer extends React.Component {
+    constructor (props) {
+        super(props);
+        this.state = {
+            isOwner : false
+        }
+    }
+    
     refreshProfile () {
         let userId = this.props.match.params.userID || this.props.me;
         !userId && this.props.history.push('/login');
-        if (userId === this.props.me) this.isOwner = true;
+        if (userId === this.props.me) this.setState({isOwner : true});
         this.props.getProfileWithStatus(userId);
     }
     componentDidMount() {
@@ -25,7 +32,7 @@ class ProfileAPIContainer extends React.Component {
     }
     render() {
         if (this.props.fetching || !this.props.profile) { return <Preloader /> }
-        return <Profile {...this.props} isOwner={this.isOwner}/>
+        return <Profile {...this.props} isOwner={this.state.isOwner}/>
     }
 }
 
@@ -43,5 +50,6 @@ let mapStateToProps = (state) => {
 }
 
 export default compose(
-    connect(mapStateToProps, { getProfileWithStatus, addPost, togglePreloader, updateStatus, savePhoto, updatingProfileInProcess, updateProfile }),
-    withRouter)(ProfileAPIContainer);
+    connect(mapStateToProps, { getProfileWithStatus, addPost, togglePreloader, updateStatus,
+        savePhoto, updatingProfileInProcess, updateProfile, reset}),
+    withRouter)(ProfileContainer);

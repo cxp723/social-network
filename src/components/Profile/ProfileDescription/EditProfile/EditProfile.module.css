@@ -1,0 +1,38 @@
+.profileForm {
+    background-color: white;
+    margin: 30px 15px;
+    padding: 40px;
+}
+.contacts {
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+    justify-content: space-between;
+  }
+  .contact {
+    width: 46%;
+    margin: 10px 20px 0 0;
+  }
+  .formRow {
+    display: flex;
+    white-space: nowrap;
+  }
+  .shortInput {
+    width: 23%;
+  }
+  .aboutMe {
+    width: 48%;
+  }
+  .buttons {
+    text-align: center;
+  }
+  .bottomSection {
+    padding-bottom: 40px;
+    position: relative;
+    width: 48%;
+  }
+  .bigCheckbox {
+    width: 20px;
+    height: 20px;
+    margin-left: 5px;
+  }

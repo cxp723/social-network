@@ -1,12 +1,15 @@
 import React from 'react';
 import classes from './Header.module.css';
 import { NavLink } from 'react-router-dom';
+import UserMenu from './UserMenu';
+import Search from './Search';
 const Header = (props) => {
     return (
         <header className={classes.header + ' ' + classes.horizontalBar}>
             <div className={classes.logo}></div>
+            <Search />
                 {props.login
-                ? <div className={classes.userInfo}><p className={classes.user}>Welcome, {props.login}</p><button onClick={props.logout} className={classes.logOut}>LogOut</button></div>
+                ? <UserMenu photo ={props.photo} name={props.name} logout={props.logout} login={props.login}/>
                 : <NavLink className={classes.login} to="/login">Login</NavLink>}
         </header>
     );

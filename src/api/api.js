@@ -31,8 +31,8 @@ export const profileAPI = {
 }
 
 export const usersAPI = {
-    getUsersFromServer (page = 1, count = 5) {
-        let usersData = apiInstance.get('users?page=' + page + '&count=' + count).then(response => response.data);
+    getUsersFromServer (page = 1, count = 5, term = '') {
+        let usersData = apiInstance.get('users?page=' + page + '&count=' + count + '&term=' + term).then(response => response.data);
         return usersData;
     }
 }

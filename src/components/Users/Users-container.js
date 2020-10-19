@@ -1,13 +1,32 @@
 import { connect } from 'react-redux';
 import Users from './Users';
 import React from 'react';
-import { follow, unfollow, getUsers, showMoreUsers, onPageChanged } from './../../redux/users-reducer';
+import { follow, unfollow, getUsers, showMoreUsers, onPageChanged, setTerm, setCurrentPage } from './../../redux/users-reducer';
 import { compose } from 'redux';
-import { getUsersTotalCount, getUsersSelectorReselect } from './../../redux/users-selectors';
+import { getUsersTotalCount, getUsersWithPhoto } from './../../redux/users-selectors';
+import { withRouter } from 'react-router-dom';
 
-class UsersAPIContainer extends React.Component {    
+class UsersContainer extends React.Component {
+    constructor (props) {
+        super (props);
+        this.state = {term: this.props.term};
+    }
+    getUsersWithTerm = () => {
+        if (this.props.match.params.term) {
+        this.setState({term: this.props.match.params.term})
+        this.props.getUsers(this.props.currentPage, this.props.pageSize, this.props.match.params.term);
+        } else {
+            this.props.getUsers(this.props.currentPage, this.props.pageSize, this.props.term);
+        }
+    }
     componentDidMount () {
-        this.props.getUsers(this.props.currentPage, this.props.pageSize);
+        this.props.setCurrentPage(1);
+        this.getUsersWithTerm();
+    }
+    componentDidUpdate (prevProps) {
+        if (prevProps.match.params.term !== this.props.match.params.term) {
+            this.getUsersWithTerm();
+        }
     }
 
     render () {
@@ -21,21 +40,23 @@ class UsersAPIContainer extends React.Component {
                         isFetching = {this.props.isFetching}
                         showMoreUsers = {this.props.showMoreUsers}
                         followingUsers= {this.props.followingUsers}
-                        paginationButtonsCount = {this.props.paginationButtonsCount}/>
+                        paginationButtonsCount = {this.props.paginationButtonsCount}
+                        term = {this.state.term}/>
     }
 }
 let mapStateToProps = (state) => {
     return {
-        users: getUsersSelectorReselect(state),
+        users: getUsersWithPhoto(state),
         usersTotalCount : getUsersTotalCount(state),
         paginationButtonsCount: state.usersPage.paginationButtonsCount,
         currentPage : state.usersPage.currentPage,
         pageSize : state.usersPage.pageSize,
+        term: state.usersPage.term,
         isFetching: state.usersPage.isFetching,
         followingUsers: state.usersPage.followingUsers
     }
 }
 
-let mapDispatchToProps = {follow, unfollow, showMoreUsers, getUsers, onPageChanged}
+let mapDispatchToProps = {follow, unfollow, showMoreUsers, getUsers, onPageChanged, setTerm, setCurrentPage}
 
-export default compose(connect (mapStateToProps, mapDispatchToProps))(UsersAPIContainer);
+export default compose(connect (mapStateToProps, mapDispatchToProps), withRouter)(UsersContainer);

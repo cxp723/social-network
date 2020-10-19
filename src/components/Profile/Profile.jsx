@@ -1,29 +1,33 @@
 import React from 'react';
+import ProfileDescription from './ProfileDescription/ProfileDescription';
 import classes from './Profile.module.css';
-import ProfileInfo from './ProfileInfo/ProfileInfo';
-import MyPosts from './MyPosts/MyPosts';
+import ProfileHeader from './ProfileHeader/ProfileHeader';
 
 
-const Profile = (props) => {
+
+const Profile = ({ profile, isOwner, updatingProfile, ...props }) => {
     return (
-        <div className={classes.content}>
-
-            <ProfileInfo 
-            profile={props.profile}
-            status={props.status}
-            updateStatus={props.updateStatus}
-            isOwner={props.isOwner}
+        <div className={classes.info}>
+            <ProfileHeader uploadingPhoto={props.uploadingPhoto}
+            isOwner={isOwner}
             savePhoto={props.savePhoto}
-            uploadingPhoto={props.uploadingPhoto}
-            updatingProfile={props.updatingProfile}
+            profile={profile}
+            status={props.status}
+            updateStatus={props.updateStatus} />
+
+            <ProfileDescription profile={profile}
+            posts = {props.posts}
+            addPost = {props.addPost}
+            reset = {props.reset}
+            isOwner={isOwner}
+            updatingProfile={updatingProfile}
             updatingProfileInProcess={props.updatingProfileInProcess}
             updateProfile={props.updateProfile}
             updateFetching={props.updateFetching}/>
-
-            {/* Showing posts component if it's owners page */}
-            {props.isOwner && !props.updatingProfile && <MyPosts photo={props.profile.photos.small} posts ={props.posts} addPost={props.addPost}/>}
-
         </div>
-)}
+
+    )
+}
+
 
 export default Profile;

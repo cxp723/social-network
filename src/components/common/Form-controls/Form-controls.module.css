@@ -18,7 +18,7 @@ span.errorMessage {
 }
 .wideInput, .wideTextarea {
     border-radius: 15px;
-    font-size: 1.3em;
+    font-size: 1.2em;
     border: 2px solid cornflowerblue;
     outline: none;
     width: 100%;
@@ -33,8 +33,8 @@ span.errorMessage {
 }
 .innerText {
     position: absolute;
-    left: 10px;
-    top: 5px;
+    left: 13px;
+    top: 0;
     font-size: .7em;
     color: gray;
 }

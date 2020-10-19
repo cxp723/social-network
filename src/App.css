@@ -1,25 +1,31 @@
 * {
   font-family: Arial, Helvetica, sans-serif;
+  
 }
 a {
-  color: black;
+  color: cornflowerblue;
+  text-decoration: none;
+}
+img {
+  padding: 0;
 }
 .app-wrapper {
   margin: 0 auto;
-  width: 90%;
+  width: 100%;
   display: grid;
   grid-template-areas: 
-  "h h"
-  "n c"
-  "f f";
-  grid-template-rows: 60px 1fr 60px;
-  grid-template-columns: 2fr 10fr;
-  grid-gap: 15px;
+  "h h h"
+  "lb c rb"
+  "f f f";
+  grid-template-rows: 80px 1fr 80px;
+  grid-template-columns: 80px 1fr 80px;
   min-height: 100vh;
+  background-color: #EDF2F6;
 }
 .content {
+  padding: 15px 15px 0;
   grid-area: c;
-  background-color: honeydew;
+  background-color: #EDF2F6;
   position: relative;
 }
 

@@ -1,7 +1,9 @@
 import React from 'react';
 import './App.css';
-import Navbar from './components/Navbar/Navbar';
-import { Route } from 'react-router-dom';
+import 'semantic-ui-css/semantic.min.css'
+import LeftNavbar from './components/Navbar/LeftNavbar';
+import RightNavbar from './components/Navbar/RightNavbar';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import News from './components/News/News';
 import Settings from './components/Settings/Settings';
 import Music from './components/Music/Music';
@@ -15,7 +17,9 @@ import { connect } from 'react-redux';
 import {withSuspense} from './hoc/withSuspense';
 import Footer from './components/Footer/Footer';
 
+
 const UsersContainer = React.lazy(() => import('./components/Users/Users-container'));
+
 
 
 class App extends React.Component {
@@ -28,16 +32,21 @@ class App extends React.Component {
     : (
       <div className="app-wrapper">
         <HeaderContainer />
-        <Navbar />
+        <LeftNavbar />
         <div className="content">
-          <Route path='/dialogs' render={() => <DialogsContainer />} />
-          <Route path='/profile/:userID?' render={() => <ProfileContainer />} />
-          <Route path='/news' component={News} />
-          <Route path='/music' component={Music} />
-          <Route path='/settings' component={Settings} />
-          <Route path='/users' render={withSuspense(UsersContainer)} />
-          <Route path='/login' render={() => <Login />} />
+          <Switch>
+            <Route exact path='/' render={() => <Redirect to="/profile"/>} />
+            <Route path='/dialogs' render={() => <DialogsContainer />} />
+            <Route path='/profile/:userID?' render={() => <ProfileContainer />} />
+            <Route path='/news' component={News} />
+            <Route path='/music' component={Music} />
+            <Route path='/settings' component={Settings} />
+            <Route path='/users/:term?' render={withSuspense(UsersContainer)} />
+            <Route path='/login' render={() => <Login />} />
+            <Route path='*' render={() => <div><h1>Page not found</h1></div>} />
+          </Switch>
         </div>
+        <RightNavbar />
         <Footer />
       </div>
     );

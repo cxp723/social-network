@@ -3,9 +3,11 @@ import { changeValuesInArray } from './../Utils/Array-changers';
 
 const initialState = {
     users: [],
+    friends: [],
     usersTotalCount: 0,
     currentPage: 1,
-    pageSize: 5,
+    pageSize: 100,
+    term: 'al',
     paginationButtonsCount: 10,
     isFetching: false,
     followingUsers: []
@@ -14,6 +16,8 @@ const initialState = {
 const FOLLOW_SUCCESS = 'FOLLOW';
 const UNFOLLOW_SUCCESS = 'UNFOLLOW';
 const SET_USERS = 'SET-USERS';
+const SET_FRIENDS = 'SET_FRIENDS';
+const SET_TERM = 'SET_TERM';
 const INCREASE_PAGE_SIZE = 'INCREASE-PAGE-SIZE';
 const SET_CURRENT_PAGE = 'SET-CURRENT-PAGE';
 const SET_USERS_TOTAL_COUNT = 'SET-USERS-TOTAL-COUNT';
@@ -34,6 +38,10 @@ let usersReducer = (state = initialState, action) => {
             return { ...state, usersTotalCount: action.usersTotalCount };
         case SET_USERS:
             return { ...state, users: [...action.users] };
+        case SET_FRIENDS:
+            return { ...state, friends: [...action.friends] };
+        case SET_TERM:
+            return { ...state, term: action.term };
         case TOGGLE_PRELOADER:
             return { ...state, isFetching: action.isFetching ? true : false };
         case TOGGLE_FOLLOWING_BUTTON:
@@ -48,7 +56,9 @@ let usersReducer = (state = initialState, action) => {
 //Action creators
 export const followSuccess = (userId) => { return { type: 'FOLLOW', userId } };
 export const unfollowSuccess = (userId) => { return { type: 'UNFOLLOW', userId } };
-export const setUsers = (users) => { return { type: 'SET-USERS', users: users } };
+export const setUsers = (users) => { return { type: 'SET-USERS', users } };
+export const setFriends = (friends) => { return { type: 'SET_FRIENDS', friends } };
+export const setTerm = (term) => { return { type: 'SET_TERM', term } };
 export const increasePageSize = () => { return { type: 'INCREASE-PAGE-SIZE' } };
 export const setCurrentPage = (currentPage) => { return { type: 'SET-CURRENT-PAGE', currentPage } };
 export const setUsersTotalCount = (usersTotalCount) => { return { type: 'SET-USERS-TOTAL-COUNT', usersTotalCount } };
@@ -57,13 +67,21 @@ export const toggleFollowingButton = (userId) => { return { type: 'TOGGLE_FOLLOW
 
 //Thunk creators
 
-export const getUsers = (currentPage, pageSize) => {
+export const getUsers = (currentPage, pageSize, term) => {
     return async (dispatch) => {
         dispatch(togglePreloader(true));
-        let data = await usersAPI.getUsersFromServer(currentPage, pageSize)
+        let data = await usersAPI.getUsersFromServer(currentPage, pageSize, term)
         dispatch(setUsers(data.items));
         dispatch(setUsersTotalCount(data.totalCount));
         dispatch(togglePreloader(false));
+    }
+}
+export const getFriends = (currentPage, pageSize, term) => {
+    return async (dispatch) => {
+        let data = await usersAPI.getUsersFromServer(currentPage, pageSize, term)
+        let friends = data.items.filter((user) => user.followed);
+        dispatch(setFriends(friends));
+        
     }
 }
 export const showMoreUsers = (pageSize) => {
@@ -95,9 +113,9 @@ export const unfollow = (userId) => {
         }
     }
 }
-export const onPageChanged = (pageNumber) => async (dispatch) => {
+export const onPageChanged = (pageNumber, pageCount, term) => async (dispatch) => {
     dispatch (togglePreloader(true));
-    let data = await usersAPI.getUsersFromServer(pageNumber);
+    let data = await usersAPI.getUsersFromServer(pageNumber, pageCount, term);
     dispatch(setUsers(data.items));
     dispatch(setCurrentPage(pageNumber));
     dispatch (togglePreloader(false));

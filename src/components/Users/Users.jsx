@@ -14,7 +14,7 @@ let Users = (props) => {
     return (
         
         <div className={classes.usersPage}>
-                <Paginator itemsTotalCount={props.usersTotalCount} itemsOnPage={props.pageSize} 
+                <Paginator term ={props.term} itemsTotalCount={props.usersTotalCount} itemsOnPage={props.pageSize} 
                 onPageSelectCallback={props.onPageChanged} buttonsCount={props.paginationButtonsCount} page={props.currentPage}/>  
                 {(props.isFetching || props.users.length === 0) ? <Preloader /> :          
                 <div className={classes.users}>

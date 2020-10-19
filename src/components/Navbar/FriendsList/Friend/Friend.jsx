@@ -1,13 +1,13 @@
 import React from 'react';
 import classes from './../FriendsList.module.css';
+import { NavLink } from 'react-router-dom';
 
-const friend = (props) => {
+const Friend = ({photo, friendName, id, children}) => {
     return (
         <div className={classes.friend}>
-            <div className={classes.userLogo}></div>
-            <span className={classes.friendName}>{props.friendName}</span>
+            <NavLink to={'/profile/' + id } title={friendName}><img src={photo} className={classes.userLogo} alt=''/> {children}</NavLink>
         </div>
     )
 }
 
-export default friend;
+export default Friend;

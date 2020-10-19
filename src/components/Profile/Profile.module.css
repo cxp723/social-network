@@ -1,0 +1,83 @@
+
+  .status {
+    cursor: pointer;
+    height: 30px;
+    text-align: center;
+  }
+  .status span {
+    font-size: .9em;
+    color: gray;
+  }
+  i.photoIcon {
+    transition: opacity .5s, transform .1s;
+    font-size: 1.8em;
+    opacity: 0;
+    margin-left: 80px;
+    cursor: pointer;
+    color: gray;
+    position: absolute;
+    left: 50%;
+    top: 67%;
+  }
+  .invisibleInput {
+    visibility: hidden;
+    display: none;
+  }
+ .photoIcon:hover {
+    transform: scale(1.2);
+    color: black;
+  }
+  .profileHeader {
+    position: relative;
+    margin: 15px;
+    border: 1px solid lightgray;
+    border-radius: 3px;
+  }
+  .wallpaper {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    margin: 0;
+  }
+  .ava {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    border-radius: 50%;
+    border: 5px solid white;
+  }
+  .userPreview {
+    position: absolute;
+    top: 127px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+  }
+  .userPreview:hover .photoIcon {
+    opacity: 100%;
+  }
+  .fullName {
+    margin: 0;
+  }
+  .bluredPhoto {
+    opacity: 50%;
+  }
+  .profileMenuBar {
+    background-color: white;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+  .profileMenuOption {
+    font-weight: 500;
+    color: #A2A6C3;
+    font-size: 1.2em;
+    cursor: pointer;
+  }
+  .profileMenuOption:hover {
+    color: #404257;
+  }
+  .divider {
+    width: 150px;
+  }
