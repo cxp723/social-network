@@ -8,7 +8,7 @@ import cn from 'classnames';
 const ProfilePhoto = ({uploadingPhoto, profile, isOwner, savePhoto}) => {
     return (
         <>
-                <img className={cn(classes.ava, uploadingPhoto && classes.bluredPhoto)} src={profile.photos.large || user_logo} alt="user avatar" />
+                <img id="about" className={cn(classes.ava, uploadingPhoto && classes.bluredPhoto)} src={profile.photos.large || user_logo} alt="user avatar" />
                 {isOwner &&
                     <label>
                         <Icon src={photoIcon} name="photo" className={classes.photoIcon} />

@@ -5,8 +5,6 @@ import LeftNavbar from './components/Navbar/LeftNavbar';
 import RightNavbar from './components/Navbar/RightNavbar';
 import { Route, Switch, Redirect } from 'react-router-dom';
 import News from './components/News/News';
-import Settings from './components/Settings/Settings';
-import Music from './components/Music/Music';
 import DialogsContainer from './components/Dialogs/Dialogs-container';
 import ProfileContainer from './components/Profile/Profile-container';
 import HeaderContainer from './components/Header/Header-container';
@@ -14,42 +12,44 @@ import Login from './components/Login/Login';
 import { initializing } from './redux/app-reducer';
 import Preloader from './components/common/Preloader/Preloader';
 import { connect } from 'react-redux';
-import {withSuspense} from './hoc/withSuspense';
+import { withSuspense } from './hoc/withSuspense';
 import Footer from './components/Footer/Footer';
-
+import Friends from './components/Friends/Friends';
 
 const UsersContainer = React.lazy(() => import('./components/Users/Users-container'));
 
 
-
 class App extends React.Component {
-  componentDidMount () {
+  componentDidMount() {
     this.props.initializing();
   }
   render() {
     return !this.props.initialized
-    ?  <Preloader />
-    : (
-      <div className="app-wrapper">
-        <HeaderContainer />
-        <LeftNavbar />
-        <div className="content">
+      ? <Preloader />
+      : (
+        <div className="app-wrapper">
           <Switch>
-            <Route exact path='/' render={() => <Redirect to="/profile"/>} />
-            <Route path='/dialogs' render={() => <DialogsContainer />} />
-            <Route path='/profile/:userID?' render={() => <ProfileContainer />} />
-            <Route path='/news' component={News} />
-            <Route path='/music' component={Music} />
-            <Route path='/settings' component={Settings} />
-            <Route path='/users/:term?' render={withSuspense(UsersContainer)} />
             <Route path='/login' render={() => <Login />} />
-            <Route path='*' render={() => <div><h1>Page not found</h1></div>} />
+            <>
+              <HeaderContainer />
+              <LeftNavbar />
+              <div className="content">
+                <Switch>
+                  <Route exact path='/' render={() => <Redirect to="/profile" />} />
+                  <Route path='/dialogs/:userID?' render={() => <DialogsContainer />} />
+                  <Route path='/profile/:userID?' render={() => <ProfileContainer />} />
+                  <Route path='/news' component={News} />
+                  <Route path='/friends' component={Friends} />
+                  <Route path='/users/:term?' render={withSuspense(UsersContainer)} />
+                  <Route path='*' render={() => <div><h1>Page not found</h1></div>} />
+                </Switch>
+              </div>
+              <RightNavbar />
+              <Footer />
+            </>
           </Switch>
         </div>
-        <RightNavbar />
-        <Footer />
-      </div>
-    );
+      );
   }
 }
 
@@ -58,4 +58,4 @@ const mapStateToProps = (state) => {
     initialized: state.app.initialized
   })
 }
-export default connect(mapStateToProps, {initializing})(App);
+export default connect(mapStateToProps, { initializing })(App);

@@ -7,8 +7,8 @@ import Photos from './Photos';
 import Contacts from './Contacts';
 import Posts from './Posts/Posts';
 
-const ProfileDescription = ({ profile, isOwner, updatingProfile, updatingProfileInProcess, updateProfile, updateFetching, posts, addPost, reset }) => {
-    
+const ProfileDescription = ({ profile, isOwner, updatingProfile, updatingProfileInProcess, 
+    updateProfile, updateFetching, posts, addPost, deletePost, reset, likePost }) => {
     
     return (
         !updatingProfile ?
@@ -18,12 +18,12 @@ const ProfileDescription = ({ profile, isOwner, updatingProfile, updatingProfile
                     <About profile={profile}/>
                     <Friends />
                 </div>
-                <Posts isOwner ={isOwner} photo={profile.photos.small} reset = {reset} posts ={posts} addPost={addPost}/>
+                <Posts isOwner ={isOwner} photo={profile.photos.small} reset = {reset} posts ={posts}
+                addPost={addPost} deletePost={deletePost} name={profile.fullName} likePost={likePost}/>
                 <div>
                     <Photos />
                     <Contacts contacts={profile.contacts}/>
                 </div>
-                {/* {isOwner && <Icon name='edit outline' className={classes.editIcon} onClick={() => { updatingProfileInProcess(true) }} /> } */}
             </div>
         :
             <EditProfile initialValues={profile} profile={profile} updatingProfile={updatingProfile} updateFetching={updateFetching}

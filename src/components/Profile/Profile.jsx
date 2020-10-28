@@ -5,25 +5,23 @@ import ProfileHeader from './ProfileHeader/ProfileHeader';
 
 
 
-const Profile = ({ profile, isOwner, updatingProfile, ...props }) => {
+const Profile = ({ profile, uploadingPhoto, savePhoto, status, updateStatus, userId, follow, unfollow, friends, getFriends, followingUsers, ...props }) => {
     return (
         <div className={classes.info}>
-            <ProfileHeader uploadingPhoto={props.uploadingPhoto}
-            isOwner={isOwner}
-            savePhoto={props.savePhoto}
+            <ProfileHeader uploadingPhoto={uploadingPhoto}
+            isOwner={props.isOwner}
+            savePhoto={savePhoto}
             profile={profile}
-            status={props.status}
-            updateStatus={props.updateStatus} />
+            userId={userId}
+            status={status}
+            updateStatus={updateStatus} 
+            updatingProfileInProcess = {props.updatingProfileInProcess}
+            follow={follow}
+            unfollow={unfollow}
+            followingUsers={followingUsers}
+            friends={friends}/>
 
-            <ProfileDescription profile={profile}
-            posts = {props.posts}
-            addPost = {props.addPost}
-            reset = {props.reset}
-            isOwner={isOwner}
-            updatingProfile={updatingProfile}
-            updatingProfileInProcess={props.updatingProfileInProcess}
-            updateProfile={props.updateProfile}
-            updateFetching={props.updateFetching}/>
+            <ProfileDescription profile={profile} {...props}/>
         </div>
 
     )

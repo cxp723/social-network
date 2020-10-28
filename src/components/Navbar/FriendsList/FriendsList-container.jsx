@@ -1,25 +1,31 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import classes from './FriendsList.module.css';
 import Friend from './Friend/Friend';
 import {getFriends} from '../../../redux/users-reducer'
 import { getRandomArr } from '../../../Utils/Array-changers';
 
-const FriendsList = ({friends, getFriends}) => {
-    useEffect (()=> {
-        getFriends(1, 100, 'ale');
-    }, [getFriends])
-    let friendsList = friends.map (friend =>
-    <Friend friendName={friend.name} photo={friend.photos.small} key={friend.id} id = {friend.id}/>);
-
-    let randomFriends = getRandomArr(friendsList, 8);
-    return (
+class FriendsList extends React.Component {
+    constructor (props) {
+        super(props);
+        this.state = {friendsList: []}
+    }
+    componentDidMount () {
+        this.props.getFriends();
+    }
+    componentDidUpdate (prevProps) {
+        if (this.props.friends && prevProps.friends !== this.props.friends) {
+            this.setState({friendsList : getRandomArr(this.props.friends.map (friend =>
+            <Friend friendName={friend.name} photo={friend.photos.small} key={friend.id} id = {friend.id}/>), 8)})
+        }
+    }
+    render () {return (
         <div>
             <div className={classes.friendsList}>
-                {randomFriends}
+                {this.state.friendsList}
             </div>
         </div>
-    )
+    )}
 }
 
 let mapStateToProps = (state) => {

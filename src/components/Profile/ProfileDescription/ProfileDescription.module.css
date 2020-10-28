@@ -25,24 +25,81 @@
       color: #404257;
   }
 
+  .newPost {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+  }
+
   .user {
-    width: 60px;
-    height: 60px;
+    width: 40px;
+    height: 40px;
     margin-right: 10px;
     border-radius: 50%;
     box-shadow: 0 0 5px black;
 }
+.post {
+  padding: 30px;
+}
+.dropdown {
+  color: #A2A6C3;
+}
 .postText {
-    display: grid;
-    grid-template-columns: 1fr 10fr;
+  font-size: 1.1em;
+  margin-top: 15px;
+  color: #A2A6C3;
+  line-height: 200%;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #A2A6C3;
+}
+.postHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.author {
+  display: flex;
+}
+.userName {
+  color: #404257;
+  margin-bottom: 0;
+  font-weight: bold;
+}
+.date {
+  font-size: .9em;
+  color: #A2A6C3;
 }
 .postInfo {
-    text-align: right;
+    display: flex;
+    justify-content: space-between;
     margin-top: 10px;
 }
-
+.likes {
+  color: #A2A6C3;
+  font-size: 1.2em  ;
+}
 
 .friendsBlock {
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+
+.photo {
+  width: 85px;
+  height: 85px;
+  object-fit: cover;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.photosBlock {
+  column-gap: 10px;
+  row-gap: 10px;
+  text-align: center;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.fullscreenPhoto {
+  margin: 0 auto;
+  max-height: 80vh;
+  object-fit: contain;
 }

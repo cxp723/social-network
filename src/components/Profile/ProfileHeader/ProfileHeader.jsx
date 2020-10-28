@@ -7,7 +7,12 @@ const ProfileHeader = (props) => {
     return (
         <div className={classes.profileHeader}>
             <ProfileTitle {...props}/>
-            <ProfileMenuBar />
+            <ProfileMenuBar isOwner={props.isOwner} updatingProfileInProcess={props.updatingProfileInProcess}
+            follow={props.follow}
+            unfollow={props.unfollow}
+            followingUsers={props.followingUsers}
+            friends={props.friends}
+            userId={props.userId}/>
         </div>
     )
 }

@@ -27,7 +27,7 @@ const UserMenu = (props) => {
       ]
 
     return (
-        <Dropdown trigger={trigger} floating options={options} className={classes.menuContainer}/>
+        <Dropdown pointing='top right' trigger={trigger} floating options={options} className={classes.menuContainer}/>
     )
 }
   

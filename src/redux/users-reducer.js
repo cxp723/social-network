@@ -27,9 +27,14 @@ const TOGGLE_FOLLOWING_BUTTON = 'TOGGLE_FOLLOWING_BUTTON'
 let usersReducer = (state = initialState, action) => {
     switch (action.type) {
         case FOLLOW_SUCCESS:
-            return { ...state, users: changeValuesInArray(state.users, 'id', action.userId, 'followed', true) }
+            return { ...state,
+                users: changeValuesInArray(state.users, 'id', action.userId, 'followed', true),
+                friends: changeValuesInArray(state.friends, 'id', action.userId, 'followed', true)
+         }
         case UNFOLLOW_SUCCESS:
-            return { ...state, users: changeValuesInArray(state.users, 'id', action.userId, 'followed', false) }
+            return { ...state,
+                users: changeValuesInArray(state.users, 'id', action.userId, 'followed', false),
+                friends: changeValuesInArray(state.friends, 'id', action.userId, 'followed', false) }
         case INCREASE_PAGE_SIZE:
             return { ...state, pageSize: state.pageSize + 5 };
         case SET_CURRENT_PAGE:
@@ -76,11 +81,10 @@ export const getUsers = (currentPage, pageSize, term) => {
         dispatch(togglePreloader(false));
     }
 }
-export const getFriends = (currentPage, pageSize, term) => {
+export const getFriends = () => {
     return async (dispatch) => {
-        let data = await usersAPI.getUsersFromServer(currentPage, pageSize, term)
-        let friends = data.items.filter((user) => user.followed);
-        dispatch(setFriends(friends));
+        let friends = await usersAPI.getFriendsFromServer();
+        dispatch(setFriends(friends.items));
         
     }
 }

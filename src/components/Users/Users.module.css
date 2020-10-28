@@ -1,54 +1,57 @@
-.user {
+.users {
     display: grid;
-    grid-template-columns: 1fr 4fr;
-    margin: 15px auto;
-    padding: 20px;
-    border: 1px solid black;
-    border-radius: 10px;
-    width: 80%;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+}
+.user {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    padding-bottom: 30px;
+    margin: 15px;
+    background-color: white;
+    border: 1px solid #A2A6C3;
+    border-radius: 3px;
+    position: relative;
+}
+.wallpaper {
+    width: 100%;
+    height: 120px;
 }
 .photo {
     width: 100px;
     height: 100px;
+    border: 4px solid white;
+    border-radius: 50%;
+    position: absolute;
+    left: 50%;
+    top: 50px;
+    transform: translateX(-50%);
 }
-.preview {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+.description {
+    text-align: center;
+    margin-top: 40px;
 }
-.info {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+.buttons {
+    margin-top: 30px;
 }
-.country::after {
-    content: ',';
+.buttons .followButton {
+    font-size: 1.5em;
 }
 .name {
+    color: #404257;
+    font-weight: 600;
+    text-align: center;
     font-size: 1.3em;
-    margin-bottom: 100px;
 }
 .location {
-    font-size: .8em;
+    font-size: 1em;
+    color: #A2A6C3;
 }
 .location p {
     margin: 0;
 }
-.followButton {
-    cursor: pointer;
-    outline: none;
-    display: block;
-    background-color: lightblue;
-    margin-top: 10px;
-    border-radius: 10px;
-    padding: 5px;
-    width: 80px;
-    color: white;
-    box-shadow: 3px 3px 6px grey;
-}
-.followButton:active {
-    box-shadow: -1px -1px 3px grey;
-}
+
 .pagination {
     display: flex;
     justify-content: center;
@@ -70,17 +73,4 @@
     box-shadow: 2px 2px 5px cornflowerblue;
     height: 19px;
     width: 19px;
-}
-.showMoreButton {
-    cursor: pointer;
-    outline: none;
-    display: block;
-    width: 120px;
-    background-color: lightblue;
-    font-size: 1.1em;
-    margin: 10px auto 30px;
-    border-radius: 10px;
-    padding: 5px 10px;
-    color: white;
-    box-shadow: 3px 3px 6px grey;
 }

@@ -12,7 +12,7 @@ const Messages = ({ messages }) => {
     return (
         <div className={classes.messagesContainer}>
             <div className={classes.messages}>
-                {messages.map(message =>
+                {!!messages && messages.map(message =>
 
                     <div key={message.id} className={classes.message + ' ' + (message.direction === 'from' ? classes.from : classes.to)}>
                         {message.text}
