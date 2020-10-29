@@ -24,7 +24,7 @@ const Paginator = React.memo(({itemsTotalCount, itemsOnPage, onPageSelectCallbac
     return (
         <div className={classes.paginator}>
             {currentSection > 1 && <button className={classes.button} onClick={goPrev}>←</button>}
-            <div className={classes.pages}>{pages.length >= 1 && pages}</div>
+            <div className={classes.pages}>{pagesCount > 1 && pages}</div>
             {currentSection < paginatorSectionsCount && <button className={classes.button} onClick={goNext}>→</button>}
         </div>
     )

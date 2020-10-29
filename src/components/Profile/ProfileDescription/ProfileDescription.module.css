@@ -83,7 +83,10 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-
+.friendsBlock a{
+  color: #404257;
+  font-weight: 500;
+}
 .photo {
   width: 85px;
   height: 85px;

@@ -45,11 +45,12 @@
     height: 300px;
     object-fit: cover;
     margin: 0;
+    display: block;
   }
   .ava {
     width: 200px;
     height: 200px;
-    object-fit: contain;
+    object-fit: cover;
     border-radius: 50%;
     border: 5px solid white;
   }

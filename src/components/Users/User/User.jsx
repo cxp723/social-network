@@ -32,18 +32,23 @@ const User = (props) => {
                 <div className={classes.buttons}>
                     {props.followed ?
     
-                    <Button circular icon="remove user" color="pink" loading={fetching(props.userId)}
-                    onClick={() => {props.unfollow(props.userId);}}
-                    className={classes.followButton}/>
+                    <>
+                        <Button circular icon="remove user" color="pink" loading={fetching(props.userId)}
+                        onClick={() => {props.unfollow(props.userId);}}
+                        className={classes.followButton}/>
     
-                    : <Button circular icon="add user"  color="green" loading={fetching(props.userId)} 
-                    onClick={() => {props.follow(props.userId);}}
-                    className={classes.followButton}/>}
-
-                    <NavLink to={'/dialogs/' + props.userId}>
-                        <Button disabled={!props.followed} circular
-                        icon="paper plane outline" color="purple" className={classes.followButton}/>
-                    </NavLink>
+                        <NavLink to={'/dialogs/' + props.userId}>
+                            <Button circular icon="paper plane outline" color="purple" className={classes.followButton}/>
+                        </NavLink>
+                    </>
+    
+                    : <>
+                        <Button circular icon="add user"  color="green" loading={fetching(props.userId)} 
+                        onClick={() => {props.follow(props.userId);}}
+                        className={classes.followButton}/>
+    
+                        <Button disabled circular icon="paper plane outline" color="purple" className={classes.followButton}/>
+                    </>}
                 </div>
                 
         </div>

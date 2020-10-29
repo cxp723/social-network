@@ -1,6 +1,7 @@
 .dialogs {
     display: flex;
     justify-content: flex-start;
+    padding: 15px 30px 30px;
 }
 .chat {
     width: 50%;
@@ -15,6 +16,8 @@
     padding: 30px 0;
     border: 1px solid #A2A6C3;
     border-radius: 3px;
+    max-height: 80vh;
+    overflow-y: auto;
 }
 .buddy a{
     margin-top: 5px;
@@ -24,7 +27,7 @@
 }
 .messagesContainer {
     overflow-y: auto;
-    height: 60vh;
+    height: 65vh;
     margin-right: -10px;
     margin-left: 30px;
 }
