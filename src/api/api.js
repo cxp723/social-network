@@ -7,8 +7,15 @@ const apiInstance = axios.create ({
         'API-KEY' : '1500a81d-951a-4b37-975e-19522be74bca'
     }
 })
+const newsApi = axios.create ({
+    baseURL : 'https://newsapi.org/v2/',
+    headers: {
+        'X-Api-Key' : '2abe93eb1c364e14a4657dd9de111293'
+    }
+})
+
 export const getNewsFromServer = () => {
-    return axios.get('http://newsapi.org/v2/top-headlines?sources=techcrunch&apiKey=2abe93eb1c364e14a4657dd9de111293').then(response => response.data)
+    return newsApi.get('top-headlines?sources=techcrunch').then(response => response.data)
 }
 const photoAPI = axios.create ({
     baseURL : 'https://api.pexels.com/v1/',
@@ -16,8 +23,8 @@ const photoAPI = axios.create ({
         'Authorization' : '563492ad6f917000010000016a815fc331434f5abb389e2b1349a69d'
     }
 })
-export const getPhotosForAlbum = (numberOfPhotos) => {
-    return photoAPI.get('curated?per_page=' + numberOfPhotos).then(response => response.data.photos);
+export const getPhotosForAlbum = (numberOfPhotos, page) => {
+    return photoAPI.get('curated?per_page=' + numberOfPhotos + '&page=' + page).then(response => response.data.photos);
 }
 
 export const profileAPI = {

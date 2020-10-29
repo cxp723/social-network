@@ -1,7 +1,8 @@
 import Header from './Header';
 import { logout } from './../../redux/auth-reducer';
 import { connect } from 'react-redux';
-
+import { compose } from 'redux';
+import { withRouter } from 'react-router-dom';
 
 let mapStateToProps = (state) => {
     return {
@@ -13,6 +14,6 @@ let mapStateToProps = (state) => {
     }
 }
 
-let HeaderContainer = connect (mapStateToProps, {logout})(Header);
+let HeaderContainer = compose (withRouter, connect (mapStateToProps, {logout}))(Header);
 
 export default HeaderContainer;

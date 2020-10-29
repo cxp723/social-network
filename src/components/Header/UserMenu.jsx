@@ -22,7 +22,6 @@ const UserMenu = (props) => {
           disabled: true,
         },
         { key: 'profile', icon: 'user', content: (<NavLink className={classes.option} to="profile">Account</NavLink>) },
-        { key: 'settings', icon: 'settings', content: (<NavLink to="settings" className={classes.option}>Settings</NavLink>) },
         { key: 'sign-out', icon: 'sign out', content: (<span className={classes.option} onClick={props.logout}>Log Out</span>) }
       ]
 

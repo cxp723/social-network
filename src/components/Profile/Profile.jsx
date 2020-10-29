@@ -21,7 +21,7 @@ const Profile = ({ profile, uploadingPhoto, savePhoto, status, updateStatus, use
             followingUsers={followingUsers}
             friends={friends}/>
 
-            <ProfileDescription profile={profile} {...props}/>
+            <ProfileDescription profile={profile} userId={userId} {...props}/>
         </div>
 
     )

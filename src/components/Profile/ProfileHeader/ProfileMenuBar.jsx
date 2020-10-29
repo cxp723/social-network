@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Button } from 'semantic-ui-react';
 import classes from '../Profile.module.css';
 import { NavLink } from 'react-router-dom';
-import { Link, animateScroll as scroll } from "react-scroll";
+import { Link} from "react-scroll";
 
 const ProfileMenuBar = ({isOwner, updatingProfileInProcess, friends, follow, unfollow, followingUsers, userId}) => {
     let followed = friends.some(friend => friend.id == userId);
@@ -36,7 +36,7 @@ const ProfileMenuBar = ({isOwner, updatingProfileInProcess, friends, follow, unf
                 onClick={() => { updatingProfileInProcess(true) }} color='orange'/>
                 : <>
                     <NavLink to={'/dialogs/' + userId}>
-                        <Button size='huge' circular icon='paper plane outline' color='purple'/>
+                        <Button disabled={!followed} size='huge' circular icon='paper plane outline' color='purple'/>
                     </NavLink>
                 {followed ?
                     <Button size='huge' loading={followingInProgress} disabled={pushed} onClick={()=>{unfollow(userId); setPushed(true);}} circular icon={pushed ? 'check': 'remove user'} color='pink'/>

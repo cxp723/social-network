@@ -38,6 +38,10 @@
     background-repeat: no-repeat;
     background-position: center;
   }
+  .currentPageName {
+    color: white;
+    font-size: 1.2em;
+  }
   .userInfo {
     height: 60px;
     display: flex;

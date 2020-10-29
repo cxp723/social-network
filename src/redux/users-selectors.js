@@ -6,9 +6,6 @@ export const getUsersSelector = (state) => {
 export const getUsersWithPhoto = createSelector(getUsersSelector, (users) => {
     return users.filter(user => !!user.photos.small);
 });
-export const getFriends = createSelector(getUsersWithPhoto, (users) => {
-    return users.filter(user => !!user.followed);
-});
 export const getUsersTotalCount = (state) => {
     return state.usersPage.usersTotalCount
 }

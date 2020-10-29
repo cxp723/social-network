@@ -8,7 +8,7 @@ import Contacts from './Contacts';
 import Posts from './Posts/Posts';
 
 const ProfileDescription = ({ profile, isOwner, updatingProfile, updatingProfileInProcess, 
-    updateProfile, updateFetching, posts, addPost, deletePost, reset, likePost }) => {
+    updateProfile, updateFetching, posts, addPost, deletePost, reset, likePost, userId }) => {
     
     return (
         !updatingProfile ?
@@ -21,7 +21,7 @@ const ProfileDescription = ({ profile, isOwner, updatingProfile, updatingProfile
                 <Posts isOwner ={isOwner} photo={profile.photos.small} reset = {reset} posts ={posts}
                 addPost={addPost} deletePost={deletePost} name={profile.fullName} likePost={likePost}/>
                 <div>
-                    <Photos />
+                    <Photos userId={userId}/>
                     <Contacts contacts={profile.contacts}/>
                 </div>
             </div>

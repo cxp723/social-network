@@ -13,8 +13,9 @@ export const getRandomArr = (arr, elementsCount) => {
     } else {
         let arrToChange = [...arr];
         let resultArr = [];
+        let randomIndex = null;
         for (let i = 0; i < elementsCount; i++) {
-            let randomIndex = Math.floor(Math.random() * (arrToChange.length));
+            randomIndex = Math.floor(Math.random() * (arrToChange.length));
             resultArr.push(arrToChange.splice(randomIndex, 1));
         }
         return resultArr;

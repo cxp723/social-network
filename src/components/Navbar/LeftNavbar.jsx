@@ -15,9 +15,11 @@ const LeftNavbar = (props) => {
             <div className={classes.item}>
                 <NavLink to="/dialogs" activeClassName={classes.active}><Icon className={classes.icon} name="wechat"/></NavLink>
             </div>
+            {/* 
+            News page is in development
             <div className={classes.item}>
                 <NavLink to="/news" activeClassName={classes.active}><Icon className={classes.icon} name="newspaper outline"/></NavLink>
-            </div>
+            </div> */}
             <div className={classes.item}>
                 <NavLink to="/users" activeClassName={classes.active}><Icon className={classes.icon} name="users"/></NavLink>
             </div>

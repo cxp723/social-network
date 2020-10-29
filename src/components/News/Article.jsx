@@ -1,6 +1,4 @@
 import React from 'react';
-import { useState } from 'react';
-import { mockComponent } from 'react-dom/test-utils';
 import { Button } from 'semantic-ui-react';
 import classes from './News.module.css';
 import moment from 'moment'

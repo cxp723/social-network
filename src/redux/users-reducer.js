@@ -8,7 +8,7 @@ const initialState = {
     currentPage: 1,
     pageSize: 100,
     term: 'al',
-    paginationButtonsCount: 10,
+    paginationButtonsCount: 3,
     isFetching: false,
     followingUsers: []
 }
@@ -75,7 +75,7 @@ export const toggleFollowingButton = (userId) => { return { type: 'TOGGLE_FOLLOW
 export const getUsers = (currentPage, pageSize, term) => {
     return async (dispatch) => {
         dispatch(togglePreloader(true));
-        let data = await usersAPI.getUsersFromServer(currentPage, pageSize, term)
+        let data = await usersAPI.getUsersFromServer(currentPage, pageSize, term);
         dispatch(setUsers(data.items));
         dispatch(setUsersTotalCount(data.totalCount));
         dispatch(togglePreloader(false));

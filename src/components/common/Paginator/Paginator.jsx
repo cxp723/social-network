@@ -5,17 +5,17 @@ import { useState } from 'react';
 const Paginator = React.memo(({itemsTotalCount, itemsOnPage, onPageSelectCallback, buttonsCount, page, term}) => {
     const pagesCount = Math.ceil(itemsTotalCount/itemsOnPage);
     const paginatorSectionsCount = Math.ceil(pagesCount/buttonsCount);
-    let [currentSection, setCurrentSection] = useState(1);
+    let currentSection = Math.ceil(page/buttonsCount);
     let leftLimit = (currentSection - 1) * buttonsCount + 1;
     let rightLimit = currentSection * buttonsCount;
     if (rightLimit > pagesCount) { rightLimit = pagesCount;}
     const goPrev = () => {
-        setCurrentSection(currentSection - 1);
-        onPageSelectCallback((currentSection-1) * buttonsCount);
+        
+        onPageSelectCallback((currentSection-1) * buttonsCount, itemsOnPage, term);
     }
     const goNext = () => {
-        setCurrentSection(currentSection + 1);
-        onPageSelectCallback(currentSection * buttonsCount + 1);
+        
+        onPageSelectCallback(currentSection * buttonsCount + 1, itemsOnPage, term);
     }
     let pages = [];
     for (let p = leftLimit; p <= rightLimit; p++) {
@@ -24,7 +24,7 @@ const Paginator = React.memo(({itemsTotalCount, itemsOnPage, onPageSelectCallbac
     return (
         <div className={classes.paginator}>
             {currentSection > 1 && <button className={classes.button} onClick={goPrev}>←</button>}
-            <div className={classes.pages}>{pages.length > 1 && pages}</div>
+            <div className={classes.pages}>{pages.length >= 1 && pages}</div>
             {currentSection < paginatorSectionsCount && <button className={classes.button} onClick={goNext}>→</button>}
         </div>
     )

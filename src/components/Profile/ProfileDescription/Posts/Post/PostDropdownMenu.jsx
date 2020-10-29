@@ -10,9 +10,7 @@ const PostDropdownMenu = ({deletePost, postId}) => {
       )
       
       const options = [
-        { key: 'edit', icon: 'pencil alternate', content: (<span className={classes.option}>Edit post</span>) },
         { key: 'delete', icon: 'trash alternate', onClick: () => {deletePost(postId)}, content: (<span className={classes.option}>Delete post</span>) }
-        
       ]
 
     return (

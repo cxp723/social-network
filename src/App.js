@@ -31,14 +31,16 @@ class App extends React.Component {
           <Switch>
             <Route path='/login' render={() => <Login />} />
             <>
-              <HeaderContainer />
+              <Route path = '/' component={HeaderContainer} />
               <LeftNavbar />
               <div className="content">
                 <Switch>
                   <Route exact path='/' render={() => <Redirect to="/profile" />} />
                   <Route path='/dialogs/:userID?' render={() => <DialogsContainer />} />
                   <Route path='/profile/:userID?' render={() => <ProfileContainer />} />
-                  <Route path='/news' component={News} />
+                  {/* 
+                  React news page is temporary disabled due to CORS problems
+                  <Route path='/news' component={News} /> */}
                   <Route path='/friends' component={Friends} />
                   <Route path='/users/:term?' render={withSuspense(UsersContainer)} />
                   <Route path='*' render={() => <div><h1>Page not found</h1></div>} />

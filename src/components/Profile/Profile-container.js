@@ -27,6 +27,7 @@ class ProfileContainer extends React.Component {
             this.setState({isOwner : false});
         }
         this.props.getProfileWithStatus(userId);
+        window.scrollTo(0,0);
     }
     componentDidMount() {
         this.refreshProfile();

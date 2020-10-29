@@ -18,7 +18,7 @@ const LoginForm = (props) => {
                 <h1 className={classes.greetingTitle}>Welcome to my Social Network</h1>
                 <p>My name is Aleksandr Kirichenko, I'm React developer and this is my simple project of Social Network. 
                     Development is still in progress, so some pages and modules are hardcoded or just emulate interaction with server.
-                    For acquaintance with this application, please use guest account: guest@tester.ru, password: test</p>
+                    For acquaintance with this application, please use guest account: kirichenko723@gmail.com, password: test</p>
                 <p>I'll be glad to answer all your questions. Contact me:</p>
                 <p> +7 (918) 048 14 90 (Viber, WhatsApp, Telegram).</p>
             </div>
