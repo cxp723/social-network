@@ -11,13 +11,6 @@ export const getRandomArr = (arr, elementsCount) => {
     if (arr.length <= elementsCount) {
         return arr
     } else {
-        let arrToChange = [...arr];
-        let resultArr = [];
-        let randomIndex = null;
-        for (let i = 0; i < elementsCount; i++) {
-            randomIndex = Math.floor(Math.random() * (arrToChange.length));
-            resultArr.push(arrToChange.splice(randomIndex, 1));
-        }
-        return resultArr;
+        return arr.sort(() => 0.5 - Math.random()).slice(0, elementsCount)
     }
 }

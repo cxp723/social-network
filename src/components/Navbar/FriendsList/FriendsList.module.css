@@ -9,6 +9,10 @@
     background-position: center;
     margin-bottom: 5px;
 }
+.userLogo:hover {
+    transform: scale(1.2);
+    transition: transform .1s linear;
+}
 .friendsList {
     display: flex;
     flex-direction: column;

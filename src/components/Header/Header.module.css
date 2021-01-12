@@ -87,3 +87,13 @@
     transform: translateY(-50%);
     color: #7F8198;
   }
+  .searchOptions {
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: 50px;
+    background-color: #fff;
+    z-index: 2;
+    top: 100%;
+    left: 0;
+  }
