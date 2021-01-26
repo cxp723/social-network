@@ -5,6 +5,7 @@ import Messages from "./Messages/Messages";
 import NewMessageRedux from "./New-message/NewMessage";
 import { DialogType, MessageType, UserType } from "../../types/types";
 
+//Some changes will be here
 type PropsType = {
   messages: Array<MessageType>;
   userId: number;
